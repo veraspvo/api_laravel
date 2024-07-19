@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
 
-class UserController extends Controller
+class UserController
 {
     public function index()
     {
-        return response()->json(['status' => true, 'message' => 'Listar usuarios_2',],200);
+        $users = User::orderBy('id', 'desc')->get();
+        return response()->json(['status' => true, 'users' => $users, ]);
     }
 }

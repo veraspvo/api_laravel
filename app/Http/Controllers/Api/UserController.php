@@ -75,4 +75,13 @@ class UserController
             ],404);
         };
     }
+    public function logout() : JsonResponse
+    {
+        auth()->user()->tokens()->delete();
+        
+        return response()->json([
+            'status' => true, 
+            'message' => 'Logout realizado com sucesso',
+        ],200);
+    }
 }

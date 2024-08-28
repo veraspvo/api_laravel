@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 //});
 
 
-    
+
 // Rota pública
 Route::post('/login', [UserController::class, 'login'])->name('login');
 
@@ -16,6 +16,7 @@ Route::post('/login', [UserController::class, 'login'])->name('login');
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
     Route::post('/users', [UserController::class, 'store']); // POST - http;//1localhost:8000/api/users
+    Route::post('/logout', [UserController::class, 'logout']);
 });
 
 

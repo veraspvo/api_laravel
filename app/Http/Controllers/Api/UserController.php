@@ -33,7 +33,7 @@ class UserController
             DB::commit();
 
             return response()->json([
-                'status' => true, 
+                'status' => true,
                 'user' => $user,
                 'message' => 'Usário criado com sucesso'
             ],400);
@@ -44,7 +44,7 @@ class UserController
             DB::rollBack();
             // Tratar o erro
             return response()->json([
-                'status' => false, 
+                'status' => false,
                 'message' => $e->getMessage(),
             ],400);
         }
@@ -52,7 +52,7 @@ class UserController
     public function login(Request $request) : JsonResponse
     {
         if (auth()->attempt($request->only('email', 'password'))) {
-          
+
             // Recuperar dados do usuário
             $user = Auth()->user();
             // Gerar um token
@@ -60,17 +60,17 @@ class UserController
 
 
             return response()->json([
-                'status' => true, 
-                'token' => $token,  
+                'status' => true,
+                'token' => $token,
                 'user' => $user,
                 'message' => 'Login realizado com sucesso',
             ],201);
-            
+
         } else {
             return response()->json([
-                'status' => false, 
-                'token' => '1234567890987654321', 
-                'message' => 'Login ou senha incorreta!', 
+                'status' => false,
+                'token' => '1234567890987654321',
+                'message' => 'Login ou senha incorreta!',
                 'email' => $request->email,
             ],404);
         };
@@ -78,10 +78,11 @@ class UserController
     public function logout() : JsonResponse
     {
         auth()->user()->tokens()->delete();
-        
+
         return response()->json([
-            'status' => true, 
+            'status' => true,
             'message' => 'Logout realizado com sucesso',
         ],200);
     }
+// teste
 }
